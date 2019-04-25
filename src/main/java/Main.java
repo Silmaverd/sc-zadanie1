@@ -1,8 +1,13 @@
 public class Main {
 
     public static void main(String[] args) {
-        DataOutHandler handler = new ConsolePrinter();
-        handler.handle("Hello world!");
+        DataOutHandlerChain handlerChain = new DataOutHandlerChain(
+            new DbInserter(),
+            new HttpSender(),
+            new ConsolePrinter()
+        );
+
+        handlerChain.allHandle("Hello world!");
     }
 
 }
